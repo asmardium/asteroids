@@ -4,7 +4,7 @@
 import pygame # type: ignore
 
 from constants import *
-from player import Player
+from player import Player, updatable, drawable
 
 def main():
 	print("Starting Asteroids!")
@@ -27,8 +27,8 @@ def main():
 			if event.type == pygame.QUIT:
 				return
 
-		#update objects
-		thePlayer.update(dt)
+		#update all objects in the updatable group
+		updatable.update(dt)
 
 		#define colors used
 		color_black = pygame.Color(0,0,0)
@@ -38,7 +38,8 @@ def main():
 		screen.fill(color=color_black)
 
 		#draw player on screen
-		thePlayer.draw(screen)
+		for each_drawable in drawable:
+			each_drawable.draw(screen)
 		
 		#refresh display
 		pygame.display.flip()
