@@ -1,7 +1,7 @@
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
-import pygame
+import pygame # type: ignore
 
 from constants import *
 from player import Player
@@ -14,17 +14,21 @@ def main():
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #This is a Surface class object in pygame
 	clock = pygame.time.Clock()
 	dt = 0
-	whileLoop = True
+	running = True
 
+	#Instantiate the player
 	player_x = SCREEN_WIDTH / 2
 	player_y = SCREEN_HEIGHT / 2
 	thePlayer = Player(player_x, player_y)
 
-	while(whileLoop):
+	while(running):
 		#enable the "x" close window button in upper right corner
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				return
+
+		#update objects
+		thePlayer.update(dt)
 
 		#define colors used
 		color_black = pygame.Color(0,0,0)
@@ -35,7 +39,7 @@ def main():
 
 		#draw player on screen
 		thePlayer.draw(screen)
-
+		
 		#refresh display
 		pygame.display.flip()
 
