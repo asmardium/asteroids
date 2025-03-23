@@ -4,7 +4,9 @@
 import pygame # type: ignore
 
 from constants import *
-from player import Player, updatable, drawable
+from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
 	print("Starting Asteroids!")
@@ -16,10 +18,21 @@ def main():
 	dt = 0
 	running = True
 
+	# Create the pygame sprite groups
+	updatable = pygame.sprite.Group()
+	drawable = pygame.sprite.Group()
+	asteroids = pygame.sprite.Group()
+		
+	# Set the containers for the classes using the pygame sprite groups
+	Player.containers = (updatable, drawable)
+	Asteroid.containers = (asteroids, updatable, drawable)
+	AsteroidField.containers = (updatable)
+
 	#Instantiate the player
 	player_x = SCREEN_WIDTH / 2
 	player_y = SCREEN_HEIGHT / 2
 	thePlayer = Player(player_x, player_y)
+	asteroid_field = AsteroidField()
 
 	while(running):
 		#enable the "x" close window button in upper right corner
