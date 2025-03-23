@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame # type: ignore
+import sys 
 
 from constants import *
 from player import Player
@@ -46,9 +47,15 @@ def main():
 		#update all objects in the updatable group
 		updatable.update(dt)
 
-		#check collision between asteroids and player
+		#check collisions between asteroids and player, and asteroids and shots
 		for each_asteroid in asteroids:
-			each_asteroid.collision_check(thePlayer)
+			if each_asteroid.collision_check(thePlayer):
+				if print("Game over!"):
+					sys.exit()
+			for each_bullet in shots:
+				if each_bullet.collision_check(each_asteroid):
+					each_bullet.kill()
+					each_asteroid.kill()
 
 		#define colors used
 		color_black = pygame.Color(0,0,0)

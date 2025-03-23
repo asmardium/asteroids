@@ -26,6 +26,6 @@ class CircleShape(pygame.sprite.Sprite):
         distance_to_object = self.position.distance_to(other_CircleShape.position)
         collision_distance = self.radius + other_CircleShape.radius
         if distance_to_object <= (collision_distance):
-            print("Game over!")
-            sys.exit()
-
+            return True
+        else:
+            return False
