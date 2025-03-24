@@ -50,12 +50,12 @@ def main():
 		#check collisions between asteroids and player, and asteroids and shots
 		for each_asteroid in asteroids:
 			if each_asteroid.collision_check(thePlayer):
-				if print("Game over!"):
-					sys.exit()
+				print("Game over!")
+				sys.exit()
 			for each_bullet in shots:
 				if each_bullet.collision_check(each_asteroid):
 					each_bullet.kill()
-					each_asteroid.kill()
+					each_asteroid.split()
 
 		#define colors used
 		color_black = pygame.Color(0,0,0)
